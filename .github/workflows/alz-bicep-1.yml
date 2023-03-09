@@ -1,0 +1,47 @@
+name: ALZ-Bicep-1 Workflow
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "infra-as-code/bicep/modules/managementGroups/**"
+      - "infra-as-code/bicep/modules/policy/**"
+      - "infra-as-code/bicep/modules/customRoleDefinitions/**"
+      - "infra-as-code/bicep/orchestration/subPlacementAll/**"
+
+env:
+  MODULE_RELEASE_VERSION: "v0.13.0"
+  LOCATION: "centralus"
+  PAR_TOP_LEVEL_MANAGEMENT_GROUP_PREFIX: "alzbicep"
+  PAR_TOP_LEVEL_MANAGEMENT_GROUP_DISPLAYNAME: "Azure Landing Zones"
+  PAR_TOP_LEVEL_MANAGEMENT_GROUP_PARENTID: ""
+
+jobs:
+  bicep_tenant_deploy:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: OIDC Login to Tenant
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          enable-AzPSSession: true
+
+      - name: "Management Groups Deployment"
+        uses: AzurePowerShell@5
+        with:
+          inlineScript: |
+            New-AzTenantDeployment `
+              -Name 'GitHubActions-ManagementGroupsDeployment-${{ github.RUN_NUMBER }}" `
+              -Location {{ env.LOCATION}} `
+              -TemplateFile managementGroups.bicep `
+              -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_PREFIX }}; parTopLevelManagementGroupDisplayName=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_DISPLAYNAME }}; parTopLevelManagementGroupParentId=${{ PAR_TOP_LEVEL_MANAGEMENT_GROUP_PARENTID }} }
+          azurePowerShellVersion: "latest"
+          pwsh: true
+          workingDirectory: releases\{{ env.MODULE_RELEASE_VERSION }}\infra-as-code\bicep\modules\managementGroups
