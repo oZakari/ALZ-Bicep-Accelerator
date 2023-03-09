@@ -11,6 +11,10 @@ on:
       - "infra-as-code/bicep/orchestration/subPlacementAll/**"
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read
+
 env:
   MODULE_RELEASE_VERSION: "v0.13.0"
   LOCATION: "centralus"
