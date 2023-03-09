@@ -9,6 +9,7 @@ on:
       - "infra-as-code/bicep/modules/policy/**"
       - "infra-as-code/bicep/modules/customRoleDefinitions/**"
       - "infra-as-code/bicep/orchestration/subPlacementAll/**"
+  workflow_dispatch:
 
 env:
   MODULE_RELEASE_VERSION: "v0.13.0"
@@ -34,14 +35,12 @@ jobs:
           enable-AzPSSession: true
 
       - name: "Management Groups Deployment"
-        uses: AzurePowerShell@5
+        uses: azure/powershell@v1
         with:
           inlineScript: |
             New-AzTenantDeployment `
               -Name 'GitHubActions-ManagementGroupsDeployment-${{ github.RUN_NUMBER }}" `
               -Location {{ env.LOCATION}} `
-              -TemplateFile managementGroups.bicep `
+              -TemplateFile releases\{{ env.MODULE_RELEASE_VERSION }}\infra-as-code\bicep\modules\managementGroupsmanagementGroups.bicep `
               -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_PREFIX }}; parTopLevelManagementGroupDisplayName=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_DISPLAYNAME }}; parTopLevelManagementGroupParentId=${{ PAR_TOP_LEVEL_MANAGEMENT_GROUP_PARENTID }} }
-          azurePowerShellVersion: "latest"
-          pwsh: true
-          workingDirectory: releases\{{ env.MODULE_RELEASE_VERSION }}\infra-as-code\bicep\modules\managementGroups
+          azPSVersion: "latest"
