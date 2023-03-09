@@ -42,5 +42,5 @@ jobs:
               -Name 'GitHubActions-ManagementGroupsDeployment-${{ github.RUN_NUMBER }}" `
               -Location {{ env.LOCATION}} `
               -TemplateFile releases\{{ env.MODULE_RELEASE_VERSION }}\infra-as-code\bicep\modules\managementGroupsmanagementGroups.bicep `
-              -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_PREFIX }}; parTopLevelManagementGroupDisplayName=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_DISPLAYNAME }}; parTopLevelManagementGroupParentId=${{ PAR_TOP_LEVEL_MANAGEMENT_GROUP_PARENTID }} }
+              -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_PREFIX }}; parTopLevelManagementGroupDisplayName=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_DISPLAYNAME }}; parTopLevelManagementGroupParentId=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_PARENTID }} }
           azPSVersion: "latest"
