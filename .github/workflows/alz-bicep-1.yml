@@ -42,5 +42,9 @@ jobs:
               -Name 'ALZ-Bicep-GitHub-ManagementGroupsDeployment-${{ github.RUN_NUMBER }}' `
               -Location '{{ env.location}}' `
               -TemplateFile 'upstream-releases\{{ env.moduleReleaseVersion }}\infra-as-code\bicep\modules\managementGroups\managementGroupsmanagementGroups.bicep' `
-              -TemplateParameterObject  '@{ parTopLevelManagementGroupPrefix='${{ env.parTopLevelManagementGroupPrefix }}'; parTopLevelManagementGroupDisplayName='${{ env.parTopLevelManagementGroupDisplayName }}'; parTopLevelManagementGroupParentId='${{ env.parTopLevelManagementGroupParentId }}' }' `
+              -TemplateParameterObject  '@{ `
+                parTopLevelManagementGroupPrefix='${{ env.parTopLevelManagementGroupPrefix }}'; ` 
+                parTopLevelManagementGroupDisplayName='${{ env.parTopLevelManagementGroupDisplayName }}'; ` 
+                parTopLevelManagementGroupParentId='${{ env.parTopLevelManagementGroupParentId }}' `
+                }' `
           azPSVersion: "latest"
