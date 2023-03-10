@@ -18,9 +18,9 @@ permissions:
 env:
   MODULE_RELEASE_VERSION: "v0.13.0"
   LOCATION: "centralus"
-  PAR_TOP_LEVEL_MANAGEMENT_GROUP_PREFIX: "alzbicep"
-  PAR_TOP_LEVEL_MANAGEMENT_GROUP_DISPLAYNAME: "Azure Landing Zones"
-  PAR_TOP_LEVEL_MANAGEMENT_GROUP_PARENTID: "9cbf111d-1374-4b91-ad3c-694790cba44e"
+  parTopLevelManagementGroupPrefix: "alzbicep"
+  parTopLevelManagementGroupDisplayName: "Azure Landing Zones"
+  parTopLevelManagementGroupParentId: "9cbf111d-1374-4b91-ad3c-694790cba44e"
 
 jobs:
   bicep_tenant_deploy:
@@ -47,5 +47,5 @@ jobs:
               -Name 'GitHubActions-ManagementGroupsDeployment-${{ github.RUN_NUMBER }}" `
               -Location {{ env.LOCATION}} `
               -TemplateFile releases\{{ env.MODULE_RELEASE_VERSION }}\infra-as-code\bicep\modules\managementGroupsmanagementGroups.bicep `
-              -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_PREFIX }}; parTopLevelManagementGroupDisplayName=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_DISPLAYNAME }}; parTopLevelManagementGroupParentId=${{ env.PAR_TOP_LEVEL_MANAGEMENT_GROUP_PARENTID }} }
+              -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.parTopLevelManagementGroupPrefix }}; parTopLevelManagementGroupDisplayName=${{ env.parTopLevelManagementGroupDisplayName }}; parTopLevelManagementGroupParentId=${{ env.parTopLevelManagementGroupParentId }} }
           azPSVersion: "latest"
