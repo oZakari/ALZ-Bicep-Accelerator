@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - "infra-as-code/bicep/modules/managementGroups/**"
-      - "infra-as-code/bicep/modules/policy/**"
-      - "infra-as-code/bicep/modules/customRoleDefinitions/**"
-      - "infra-as-code/bicep/orchestration/subPlacementAll/**"
   workflow_dispatch:
 
 permissions:
@@ -16,11 +11,11 @@ permissions:
   contents: read
 
 env:
-  MODULE_RELEASE_VERSION: "v0.13.0"
-  LOCATION: "centralus"
+  moduleReleaseVersion: "v0.13.0"
+  location: "centralus"
   parTopLevelManagementGroupPrefix: "alzbicep"
   parTopLevelManagementGroupDisplayName: "Azure Landing Zones"
-  parTopLevelManagementGroupParentId: "9cbf111d-1374-4b91-ad3c-694790cba44e"
+  parTopLevelManagementGroupParentId: ""
 
 jobs:
   bicep_tenant_deploy:
@@ -44,8 +39,11 @@ jobs:
         with:
           inlineScript: |
             New-AzTenantDeployment `
-              -Name GitHubActions-ManagementGroupsDeployment-${{ github.RUN_NUMBER }} `
-              -Location {{ env.LOCATION}} `
-              -TemplateFile releases\{{ env.MODULE_RELEASE_VERSION }}\infra-as-code\bicep\modules\managementGroupsmanagementGroups.bicep `
-              -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.parTopLevelManagementGroupPrefix }}; parTopLevelManagementGroupDisplayName=${{ env.parTopLevelManagementGroupDisplayName }}; parTopLevelManagementGroupParentId=${{ env.parTopLevelManagementGroupParentId }} }
+              -Name 'ALZ-Bicep-GitHub-ManagementGroupsDeployment-${{ github.RUN_NUMBER }}' `
+              -Location '{{ env.location}}' `
+              -TemplateFile 'upstream-releases\{{ env.moduleReleaseVersion }}\infra-as-code\bicep\modules\managementGroups\managementGroupsmanagementGroups.bicep' `
+              -TemplateParameterObject  '@{
+                parTopLevelManagementGroupPrefix='${{ env.parTopLevelManagementGroupPrefix }}'; 
+                parTopLevelManagementGroupDisplayName='${{ env.parTopLevelManagementGroupDisplayName }}'; 
+                parTopLevelManagementGroupParentId='${{ env.parTopLevelManagementGroupParentId }} }' `
           azPSVersion: "latest"
