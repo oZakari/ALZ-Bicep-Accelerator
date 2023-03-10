@@ -10,13 +10,6 @@ permissions:
   id-token: write
   contents: read
 
-env:
-  moduleReleaseVersion: "v0.13.0"
-  location: "centralus"
-  parTopLevelManagementGroupPrefix: "alzbicep"
-  parTopLevelManagementGroupDisplayName: "Azure Landing Zones"
-  parTopLevelManagementGroupParentId: ""
-
 jobs:
   bicep_tenant_deploy:
     runs-on: windows-latest
