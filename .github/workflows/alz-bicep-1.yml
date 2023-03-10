@@ -44,7 +44,7 @@ jobs:
         with:
           inlineScript: |
             New-AzTenantDeployment `
-              -Name 'GitHubActions-ManagementGroupsDeployment-${{ github.RUN_NUMBER }} `
+              -Name GitHubActions-ManagementGroupsDeployment-${{ github.RUN_NUMBER }} `
               -Location {{ env.LOCATION}} `
               -TemplateFile releases\{{ env.MODULE_RELEASE_VERSION }}\infra-as-code\bicep\modules\managementGroupsmanagementGroups.bicep `
               -TemplateParameterObject  @{ parTopLevelManagementGroupPrefix=${{ env.parTopLevelManagementGroupPrefix }}; parTopLevelManagementGroupDisplayName=${{ env.parTopLevelManagementGroupDisplayName }}; parTopLevelManagementGroupParentId=${{ env.parTopLevelManagementGroupParentId }} }
