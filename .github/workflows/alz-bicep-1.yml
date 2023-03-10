@@ -45,5 +45,10 @@ jobs:
               -TemplateParameterObject  '@{ `
                 parTopLevelManagementGroupPrefix='${{ env.parTopLevelManagementGroupPrefix }}'; ` 
                 parTopLevelManagementGroupDisplayName='${{ env.parTopLevelManagementGroupDisplayName }}'; ` 
+<<<<<<< HEAD
                 parTopLevelManagementGroupParentId='${{ env.parTopLevelManagementGroupParentId }}'}' `
+=======
+                parTopLevelManagementGroupParentId='${{ env.parTopLevelManagementGroupParentId }}' `
+                }' `
+>>>>>>> c419e15bfb93bc5d08b168048d1eb0c1608e789a
           azPSVersion: "latest"
