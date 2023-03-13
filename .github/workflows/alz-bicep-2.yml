@@ -5,8 +5,13 @@ on:
     branches:
       - "main"
     paths:
-      - "infra-as-code/bicep/modules/roleAssignments/**"
-      - "infra-as-code/bicep/modules/policy/assignments/**"
+      - "**/infra-as-code/bicep/modules/roleAssignments/**"
+      - "**/infra-as-code/bicep/modules/policy/assignments/**"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
 
 env:
   ManagementGroupPrefix: "alzbicep"
@@ -25,17 +30,20 @@ env:
 
 jobs:
   bicep_tenant_deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Azure Login
+      - name: OIDC Login to Tenant
         uses: azure/login@v1
         with:
-          creds: "${{ secrets.AZURE_CREDENTIALS }}"
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          enable-AzPSSession: true
 
       - name: Deploy Role Assignment
         id: create_role_assignment
