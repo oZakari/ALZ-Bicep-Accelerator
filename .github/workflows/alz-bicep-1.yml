@@ -36,6 +36,7 @@ jobs:
         with:
           inlineScript: |
             ls
+            Write-Host ${{github.workspace}}
             Get-ChildItem -Recurse *.txt | Format-Table FullName
             .\powershell-automation\pipeline-scripts\Deploy-ManagementGroups.ps1
           azPSVersion: "latest"
