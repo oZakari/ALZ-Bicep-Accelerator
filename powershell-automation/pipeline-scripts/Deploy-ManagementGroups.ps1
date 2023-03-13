@@ -3,10 +3,10 @@ param (
   [String]$Location = "$($env:LOCATION)",
 
   [Parameter()]
-  [String]$TemplateFile = "$($GITHUB_WORKSPACE)\upstream-releases\$($env:UPSTREAM_RELEASEVERSION)\infra-as-code\bicep\modules\managementGroups\managementGroups.bicep",
+  [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASEVERSION)\infra-as-code\bicep\modules\managementGroups\managementGroups.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "$($GITHUB_WORKSPACE)\upstream-releases\$($env:UPSTREAM_RELEASEVERSION)\infra-as-code\bicep\modules\managementGroups\parameters\managementGroups.parameters.all.json"
+  [String]$TemplateParameterFile = "\upstream-releases\$($env:UPSTREAM_RELEASEVERSION)\infra-as-code\bicep\modules\managementGroups\parameters\managementGroups.parameters.all.json"
   
 )
 
