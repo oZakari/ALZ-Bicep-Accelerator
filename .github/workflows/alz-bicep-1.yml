@@ -10,6 +10,10 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  LOCATION: "centralus"
+  UPSTREAM_RELEASEVERSION: "v0.13.0"
+
 jobs:
   bicep_tenant_deploy:
     runs-on: windows-latest
