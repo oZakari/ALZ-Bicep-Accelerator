@@ -16,7 +16,6 @@ param (
 $inputObject = @{
   DeploymentName        = 'alz-CustomRoleDefsDeployment-{0}' -f ( -join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
   Location              = $Location
-  ManagementGroupId     = $TopLevelMGPrefix
   TemplateFile          = $TemplateFile
   TemplateParameterFile = $TemplateParameterFile
   Verbose               = $true
