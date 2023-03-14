@@ -11,13 +11,13 @@ permissions:
   contents: read
 
 env:
-  LOCATION: "centralus"
+  LOCATION: "eastus2"
   UPSTREAM_RELEASE_VERSION: "v0.13.0"
   MANAGEMENT_SUBSCRIPTION_ID: "b6fb3c43-1fce-4636-a837-2ad04e1a5d5a"
-  TOP_LEVEL_MG_PREFIX: "akz"
+  TOP_LEVEL_MG_PREFIX: "alz"
 
 jobs:
-  bicep_tenant_deploy:
+  ALZ_Bicep_1_Workflow_Job:
     runs-on: windows-latest
     steps:
       - name: Checkout Repo
@@ -45,4 +45,11 @@ jobs:
         with:
           inlineScript: |
             .\powershell-automation\pipeline-scripts\Deploy-LoggingAndSentinel.ps1
+          azPSVersion: "latest"
+
+      - name: "Custom Policy Definitions Deployment"
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            .\powershell-automation\pipeline-scripts\Deploy-CustomPolicyDefinitions.ps1
           azPSVersion: "latest"
