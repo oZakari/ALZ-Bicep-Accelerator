@@ -29,6 +29,7 @@ Select-AzSubscription -SubscriptionId $ManagementSubscriptionId
 # Create Resource Group - optional when using an existing resource group
 New-AzResourceGroup `
   -Name $inputObject.ResourceGroupName `
-  -Location $Location
+  -Location $Location `
+  -Force
 
 New-AzResourceGroupDeployment @inputObject
