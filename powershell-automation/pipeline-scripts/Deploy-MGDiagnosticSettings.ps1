@@ -25,4 +25,4 @@ $inputObject = @{
   Verbose               = $true
 }
 
-New-AzManagementGroupDeployment @inputObject -parLogAnalyticsWorkspaceResourceId "/subscriptions/$($ManagementSubscriptionId)/rg-$($TopLevelMGPrefix)-logging-001/providers/microsoft.operationalinsights/workspaces/$($TopLevelMGPrefix)-log-analytics"
+New-AzManagementGroupDeployment @inputObject
