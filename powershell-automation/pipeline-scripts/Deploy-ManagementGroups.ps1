@@ -7,7 +7,6 @@ param (
 
   [Parameter()]
   [String]$TemplateParameterFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\managementGroups\parameters\managementGroups.parameters.all.json"
-  
 )
 
 # Parameters necessary for deployment

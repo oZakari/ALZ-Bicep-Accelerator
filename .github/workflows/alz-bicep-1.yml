@@ -60,3 +60,10 @@ jobs:
           inlineScript: |
             .\powershell-automation\pipeline-scripts\Deploy-CustomRoleDefinitions.ps1
           azPSVersion: "latest"
+
+      - name: "Custom Management Group Diagnostic Settings"
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            .\powershell-automation\pipeline-scripts\Deploy-MGDiagnosticSettings.ps1
+          azPSVersion: "latest"
