@@ -4,24 +4,24 @@ param (
 
   [Parameter()]
   [String]$ManagementSubscriptionId = "$($env:MANAGEMENT_SUBSCRIPTION_ID)",
+  
+  [Parameter()]
+  [String]$TopLevelMGPrefix = "$($env:TOP_LEVEL_MG_PREFIX)",
 
   [Parameter()]
-  [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASEVERSION)\infra-as-code\bicep\modules\logging\logging.bicep",
+  [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\logging\logging.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "upstream-releases\$($env:UPSTREAM_RELEASEVERSION)\infra-as-code\bicep\modules\logging\parameters\logging.parameters.all.json"
+  [String]$TemplateParameterFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\logging\parameters\logging.parameters.all.json"
   
 )
-
-# Set the top level MG Prefix in accordance to your environment. This example assumes default 'alz'.
-$TopLevelMGPrefix = "alz"
 
 # Parameters necessary for deployment
 $inputObject = @{
   DeploymentName        = 'alz-LoggingDeploy-{0}' -f ( -join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
   ResourceGroupName     = "rg-$TopLevelMGPrefix-logging-001"
-  TemplateFile          = "infra-as-code/bicep/modules/logging/logging.bicep"
-  TemplateParameterFile = "infra-as-code/bicep/modules/logging/parameters/logging.parameters.all.json"
+  TemplateFile          = $TemplateFile
+  TemplateParameterFile = $TemplateParameterFile
   Verbose               = $true
 }
 

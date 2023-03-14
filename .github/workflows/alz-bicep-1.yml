@@ -12,8 +12,9 @@ permissions:
 
 env:
   LOCATION: "centralus"
-  UPSTREAM_RELEASEVERSION: "v0.13.0"
+  UPSTREAM_RELEASE_VERSION: "v0.13.0"
   MANAGEMENT_SUBSCRIPTION_ID: "b6fb3c43-1fce-4636-a837-2ad04e1a5d5a"
+  TOP_LEVEL_MG_PREFIX: "akz"
 
 jobs:
   bicep_tenant_deploy:
