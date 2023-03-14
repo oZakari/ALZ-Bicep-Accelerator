@@ -19,6 +19,7 @@ $inputObject = @{
   ManagementGroupId     = $TopLevelMGPrefix
   TemplateFile          = $TemplateFile
   TemplateParameterFile = $TemplateParameterFile
+  Verbose               = $true
 }
 
 New-AzManagementGroupDeployment @inputObject
