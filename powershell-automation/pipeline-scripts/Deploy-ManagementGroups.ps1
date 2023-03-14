@@ -10,6 +10,7 @@ param (
   
 )
 
+# Parameters necessary for deployment
 $inputObject = @{
   DeploymentName        = 'alz-MGDeployment-{0}' -f ( -join (Get-Date -Format 'yyyyMMddTHHMMssffffZ')[0..63])
   Location              = $Location
