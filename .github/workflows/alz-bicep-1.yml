@@ -13,6 +13,7 @@ permissions:
 env:
   LOCATION: "centralus"
   UPSTREAM_RELEASEVERSION: "v0.13.0"
+  MANAGEMENT_SUBSCRIPTION_ID: "b6fb3c43-1fce-4636-a837-2ad04e1a5d5a"
 
 jobs:
   bicep_tenant_deploy:
@@ -35,8 +36,12 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            ls
-            Write-Host ${{github.workspace}}
-            Get-ChildItem -Recurse *.txt | Format-Table FullName
             .\powershell-automation\pipeline-scripts\Deploy-ManagementGroups.ps1
+          azPSVersion: "latest"
+
+      - name: "Logging and Sentinel Deployment"
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            .\powershell-automation\pipeline-scripts\Deploy-LoggingAndSentinel.ps1
           azPSVersion: "latest"
