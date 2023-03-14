@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - "**/infra-as-code/bicep/modules/roleAssignments/**"
-      - "**/infra-as-code/bicep/modules/policy/assignments/**"
   workflow_dispatch:
 
 permissions:
@@ -14,22 +11,13 @@ permissions:
   contents: read
 
 env:
-  ManagementGroupPrefix: "alzbicep"
-  TopLevelManagementGroupDisplayName: "Azure Landing Zones"
-  Location: "centralus"
-  LoggingSubId: "44273f48-4fd6-4144-b278-d19d201ad922"
-  LoggingResourceGroupName: "alzbicep-centrallogging"
-  HubNetworkSubId: "0f18a4f9-2e78-43d0-b06a-6a490469a7a6"
-  HubNetworkResourceGroupName: "Hub_Networking"
-  RoleAssignmentManagementGroupId: "alzbicep-platform"
-  PrivateSpokeNetworkSubId: "6a4b4279-20aa-4245-8b88-64f9f491b9b2"
-  PrivateSpokeNetworkResourceGroupName: "Private_LZ1_Networking"
-  PublicSpokeNetworkSubId: "1e63056d-66f8-4d36-8454-b4375eb8578f"
-  PublicSpokeNetworkResourceGroupName: "Public_LZ1_Networking"
-  runNumber: ${{ github.run_number }}
+  LOCATION: "eastus2"
+  UPSTREAM_RELEASE_VERSION: "v0.13.0"
+  MANAGEMENT_SUBSCRIPTION_ID: "b6fb3c43-1fce-4636-a837-2ad04e1a5d5a"
+  TOP_LEVEL_MG_PREFIX: "alz"
 
 jobs:
-  bicep_tenant_deploy:
+  ALZ_Bicep_2_Workflow_Job:
     runs-on: windows-latest
     steps:
       - name: Checkout Repo
@@ -45,26 +33,9 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
-      - name: Deploy Role Assignment
-        id: create_role_assignment
-        uses: azure/arm-deploy@v1
+      - name: "Role Assignment Deployments"
+        uses: azure/powershell@v1
         with:
-          scope: managementgroup
-          managementGroupId: ${{ env.RoleAssignmentManagementGroupId }}
-          region: ${{ env.Location }}
-          template: infra-as-code/bicep/modules/roleAssignments/roleAssignmentManagementGroup.bicep
-          parameters: infra-as-code/bicep/modules/roleAssignments/parameters/roleAssignmentManagementGroup.servicePrincipal.parameters.all.json
-          deploymentName: create_role_assignment-${{ env.runNumber }}
-          failOnStdErr: false
-
-      - name: Deploy Default Policy Assignments
-        id: create_policy_assignments
-        uses: azure/arm-deploy@v1
-        with:
-          scope: managementgroup
-          managementGroupId: ${{ env.ManagementGroupPrefix }}
-          region: ${{ env.Location }}
-          template: infra-as-code/bicep/modules/policy/assignments/alzDefaults/alzDefaultPolicyAssignments.bicep
-          parameters: infra-as-code/bicep/modules/policy/assignments/alzDefaults/parameters/alzDefaultPolicyAssignments.parameters.all.json
-          deploymentName: create_policy_assignments-${{ env.runNumber }}
-          failOnStdErr: false
+          inlineScript: |
+            .\powershell-automation\pipeline-scripts\Deploy-RoleAssignments.ps1
+          azPSVersion: "latest"
