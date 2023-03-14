@@ -9,7 +9,7 @@ param (
   [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\roleAssignments\roleAssignmentManagementGroup.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\roleAssignments\parameters\roleAssignmentManagementGroup.securityGroup.parameters.all.jsonn"
+  [String]$TemplateParameterFile = "config\custom-parameters\roleAssignmentManagementGroup.securityGroup.parameters.all.jsonn"
 )
 
 # Parameters necessary for deployment

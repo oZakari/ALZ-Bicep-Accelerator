@@ -9,7 +9,7 @@ param (
   [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\policy\definitions\customPolicyDefinitions.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\policy\definitions\parameters\customPolicyDefinitions.parameters.all.json"
+  [String]$TemplateParameterFile = "config\custom-parameters\customPolicyDefinitions.parameters.all.json"
 )
 
 # Parameters necessary for deployment
@@ -23,3 +23,5 @@ $inputObject = @{
 }
 
 New-AzManagementGroupDeployment @inputObject
+
+config\custom-parameters

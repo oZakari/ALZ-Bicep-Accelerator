@@ -6,7 +6,7 @@ param (
   [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\managementGroups\managementGroups.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\managementGroups\parameters\managementGroups.parameters.all.json"
+  [String]$TemplateParameterFile = "config\custom-parameters\managementGroups.parameters.all.json"
 )
 
 # Parameters necessary for deployment

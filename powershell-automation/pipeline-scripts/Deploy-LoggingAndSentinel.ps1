@@ -12,7 +12,7 @@ param (
   [String]$TemplateFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\logging\logging.bicep",
 
   [Parameter()]
-  [String]$TemplateParameterFile = "upstream-releases\$($env:UPSTREAM_RELEASE_VERSION)\infra-as-code\bicep\modules\logging\parameters\logging.parameters.all.json"
+  [String]$TemplateParameterFile = "config\custom-parameters\logging.parameters.all.json"
 )
 
 # Parameters necessary for deployment
