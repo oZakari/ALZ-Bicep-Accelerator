@@ -21,4 +21,4 @@ $inputObject = @{
   Verbose               = $true
 }
 
-New-AzManagementGroupDeployment @inputObject -
+New-AzManagementGroupDeployment @inputObject
