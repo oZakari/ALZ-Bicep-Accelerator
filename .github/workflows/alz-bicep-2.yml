@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - "main"
+    paths:
+      - "config/custom-parameters/roleAssignmentManagementGroup.servicePrincipal.parameters.all.json"
+      - "config/custom-parameters/logging.parameters.all.json"
+      - "config/custom-parameters/customPolicyDefinitions.parameters.all.json"
+      - "config/custom-parameters/customRoleDefinitions.parameters.all.json"
+      - "config/custom-parameters/managementGroups.parameters.all.json"
   workflow_dispatch:
 
 permissions:
