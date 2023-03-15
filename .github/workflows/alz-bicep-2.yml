@@ -39,9 +39,16 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           enable-AzPSSession: true
 
-      - name: "Role Assignment Deployments"
+      - name: "Role Assignments Deployment"
         uses: azure/powershell@v1
         with:
           inlineScript: |
             .\powershell-automation\pipeline-scripts\Deploy-RoleAssignments.ps1
+          azPSVersion: "latest"
+
+      - name: "Built-in and Custom Policy Assignments Deployment"
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            .\powershell-automation\pipeline-scripts\Deploy-PolicyAssignments.ps1
           azPSVersion: "latest"
