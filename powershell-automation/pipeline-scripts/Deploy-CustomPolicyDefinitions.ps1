@@ -23,5 +23,3 @@ $inputObject = @{
 }
 
 New-AzManagementGroupDeployment @inputObject
-
-config\custom-parameters
